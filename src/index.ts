@@ -1,1 +1,1 @@
-console.log("hajime");
+console.log("hajimemashite");

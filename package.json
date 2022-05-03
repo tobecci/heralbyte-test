@@ -1,25 +1,25 @@
 {
-  "name": "ts-boilerplate",
+  "name": "ts-express-boilerplate",
   "version": "1.0.0",
-  "description": "typescript boilerplate",
+  "description": "typescript express boilerplate",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:ts": "./node_modules/.bin/tsc --watch",
-    "start:js": "./node_modules/.bin/nodemon ./dist/index.js",
-    "start:dev": "./node_modules/.bin/concurrently \"npm run start:ts\" \"npm run start:js\"",
-    "start": "./node_modules/.bin/tsc && node ./dist/index.js"
+    "start:ts": "npx tsc --watch",
+    "start:js": "npx nodemon ./dist/index.js",
+    "start:dev": "npx tsc && npx concurrently \"npm run start:ts\" \"npm run start:js\"",
+    "start": "npx tsc && node ./dist/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tobecci/codeinn-whatsapp-bot.git"
+    "url": "git+https://github.com/tobecci/ts-express-boilerplate.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tobecci/codeinn-whatsapp-bot/issues"
+    "url": "https://github.com/tobecci/ts-express-boilerplate/issues"
   },
-  "homepage": "https://github.com/tobecci/codeinn-whatsapp-bot#readme",
+  "homepage": "https://github.com/tobecci/ts-express-boilerplate#readme",
   "devDependencies": {
     "concurrently": "^7.1.0",
     "nodemon": "^2.0.15",

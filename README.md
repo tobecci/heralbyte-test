@@ -1,6 +1,6 @@
-# Typescript boilerplate
+# Typescript Expressjs boilerplate
 
-a typescipt boiler plate for basic nodejs project
+a typescipt boiler plate for basic expressjs project
 
 # Starting the project
 
