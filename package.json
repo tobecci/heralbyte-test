@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/tobecci/ts-express-boilerplate#readme",
   "devDependencies": {
+    "@types/node": "^18.0.0",
     "concurrently": "^7.1.0",
     "nodemon": "^2.0.15",
     "tslint": "^6.1.3"
