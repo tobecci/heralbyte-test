@@ -3,8 +3,30 @@ const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
 import { join } from "path"
 const csv = require('csvtojson')
-
-import { Sequelize, Model, DataTypes, ModelCtor } from 'sequelize';
+import { Sequelize } from 'sequelize';
+interface userList {
+    'Account': string,
+    'System Reference': string,
+    'Customer Reference': string,
+    'Operator Reference': string,
+    'Vendor SIM': string,
+    'Tag': string,
+    'Route Tag': string,
+    'Wholesaler': string,
+    'App Host': string,
+    'Time': string,
+    'Target': string,
+    'Type': string,
+    'Country': string,
+    'Operator Name': string,
+    'Amount': string,
+    'Currency': string,
+    'State': string,
+    'Successful': string,
+    'Response Code': string,
+    'Completed In': string,
+    'Channel': string,
+}
 
 export default function init(app: Express, sequelize: Sequelize){
     app.get('/', function(req, res){
@@ -12,40 +34,35 @@ export default function init(app: Express, sequelize: Sequelize){
     });
 
     app.post('/convert', upload.single('csv'), async function(req, res){
-
-        // target, operator name
-        // target, network
+        
+        //if file is not present return error
+        if(!req.file){
+            res.status(400).json({ msg: "upload the csv file" }).end()
+            return;
+        }
 
         //get file path
         let fileName = req.file.path;
         let filePath = join(__dirname + '../../../', fileName)
 
-        const jsonArray = await csv().fromFile(filePath);
+        //convert the csv file to json
+        const jsonArray: userList[] = await csv().fromFile(filePath);
 
         const userModel = sequelize.models.User;
         
-        // let user = new userModel({
-        //     target: "test",
-        //     network: "test",
-        // });
-
+        //iterate and save items to db
         jsonArray.forEach(function(item){
             // create a model and save it
-            let userInstance = new userModel({
+            userModel.create({
                 target: item['Target'],
                 network: item['Operator Name']
             })
-
-            userInstance.save();
         })
 
-        //import csv to db
-
-        res.json({
-            "body": req.body,
-            "file": req.file,
-            "path": filePath,
-            "array": jsonArray
+        res
+        .status(201)
+        .json({
+            "msg": "csv has been imported"
         }).end();
     })
 }
